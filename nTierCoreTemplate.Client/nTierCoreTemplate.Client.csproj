@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.78" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="5.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\nTierCoreTemplate.Admin\nTierCoreTemplate.Admin.csproj" />
+    <ProjectReference Include="..\nTierCoreTemplate.Core\nTierCoreTemplate.Core.csproj" />
+  </ItemGroup>
+
+</Project>

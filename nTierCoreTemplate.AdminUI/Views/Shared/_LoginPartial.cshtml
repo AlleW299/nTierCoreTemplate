@@ -1,0 +1,19 @@
+﻿@model nTierCoreTemplate.Core.Models.AccountViewModel_LoginUser
+
+@if (User.Identity.IsAuthenticated)
+{
+    @*<form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">*@
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item text-dark" >Hello @User.Identity.Name</li>
+        <li class="nav-item"><a class=" text-dark" style="padding-left: 25px" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>&nbsp;</li>
+        @*<li class="nav-item">
+            <button type="submit" class="nav-link text-dark">Log out</button>
+        </li>*@
+    </ul>
+    @*</form>*@
+} else {
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item" ><a class="text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>&nbsp;</li>
+        <li class="nav-item" style=" padding-left: 25px"><a class="text-dark" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>&nbsp;</li>
+    </ul>
+}

@@ -1,0 +1,76 @@
+﻿@model nTierCoreTemplate.Core.Models.AccountViewModel_LoginUser
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div style="padding-top:50px;"></div>
+<div style="padding-top:50px;">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            You are Logged in as
+            <span style="font-size:large;color:forestgreen;">
+                @User.Identity.Name
+            </span>
+        </div>
+        <div class="row" style="padding-top:50px;">
+            @Html.ActionLink("Log Off", "Logoff",
+            "Home", null, new { @class = "btn btn-primary btn-lg rph-login-button" })
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div>
+                    @using (Html.BeginForm("LoginUser", "Account",
+                   FormMethod.Post, new { role = "form" }))
+                    {
+                    <div>
+                        @Html.AntiForgeryToken()
+                        <div>
+                            <label>User name</label><br />
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.Username,
+                            new { @class = "form-control txtbox" })
+                        </div>
+                        <div style="padding-top:20px;"></div>
+                        <div>
+                            <label>Password</label><br />
+                        </div>
+                        <div>
+                            @Html.PasswordFor(m => m.Password,
+                            new { @class = "form-control txtbox" })
+                        </div>
+                        @{
+                            if (!Model.Success)
+                            {
+                                <span class="text-danger">@Model.Errors[0]</span>
+                            }
+                        }
+                    </div>
+                        <div class="padding-left:35%; width:60%;" style="margin-top: 50px;">
+                            <div class="padding-top: 20px;">
+                                <input class="btn btn-primary btn-lg rph-login-button" style="width:100%;" type="submit" value="Login" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div style="padding-top:30px;">
+                    <div>
+                        <b>
+                            Features<br />
+                        </b>
+                        Users secured by Jwt security.<br />
+                        Passwords are encrypted in the database.<br />
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

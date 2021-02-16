@@ -1,0 +1,67 @@
+﻿using System.Linq;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using nTierCoreTemplate.Admin.Services;
+using nTierCoreTemplate.Core.Models;
+using nTierCoreTemplate.Core;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
+using AuthorizeAttribute = Microsoft.AspNetCore.Authorization.AuthorizeAttribute;
+using AllowAnonymousAttribute = Microsoft.AspNetCore.Authorization.AllowAnonymousAttribute;
+using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using FromBodyAttribute = Microsoft.AspNetCore.Mvc.FromBodyAttribute;
+using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System;
+
+namespace nTierCoreTemplate.Admin.Controllers
+{
+    [ApiController]
+    [Route("admin_api/APIAuthentication")]
+    [Produces("application/json")]
+    public class APIAuthenticationController : ApiController //ControllerBase,
+    {
+        // Dependency injections
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration _configuration;
+        private readonly ITokenProviderService _tokenProviderService;
+        private readonly IAPIAuthenticationService _authenticationService;
+
+        public APIAuthenticationController(IHttpContextAccessor httpContextAccessor,
+            IConfiguration configuration,
+            ITokenProviderService tokenProviderService,
+            IAPIAuthenticationService authenticationService)
+        {
+            _httpContextAccessor = httpContextAccessor;
+            _configuration = configuration;
+            _tokenProviderService = tokenProviderService;
+            _authenticationService = authenticationService;
+        }
+
+        /// <summary>
+        /// Api Athentication
+        /// Accessable through 'https://localhost:44335/APIAuthenticationController/authenticate'
+        /// {
+        ///     username: "",
+        ///     password: ""
+        /// }
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [Route("SignIn")]
+        [HttpGet]
+        public Task<string> SignIn([FromBody]AuthenticateModel model)
+        {
+            var response = _authenticationService.Authenticate_Async(model.Username, model.Password);
+
+            if (response == null)
+                response = Task.FromResult(String.Format("{{ \"Message\": \"{0}\" }}", "Username or password is incorrect"));
+
+            return response;
+        }
+    }
+}

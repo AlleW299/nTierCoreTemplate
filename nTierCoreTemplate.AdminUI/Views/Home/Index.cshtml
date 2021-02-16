@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<nTierCoreTemplate.Core.Language> SharedLocalizer
+@{
+	//@inject IHtmlLocalizer<nTierCoreTemplate.Core.Language> SharedLocalizer
+	ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+	<h1 class="display-4">Welcome To Code Generator IV</h1>
+	<p>MVC .NET Core 3.1 C# n-Tier Application Template.</p>
+	<p>@ViewBag.Authentication</p>
+	<p>@SharedLocalizer["Language&CultureTest"]</p>
+</div>
+<div class="row">
+	<div class="col-md-3">
+		<h3>Application Features</h3>
+		<ul>
+			<li>Generation of all generic code</li>
+			<li>API JWT Authentication</li>
+			<li>Seperate Admin & Client</li>
+			<li>Repository architecture</li>
+			<li>Full API secure access</li>
+			<li>Async database layer</li>
+			<li>Dependency injection Services</li>
+			<li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<h3>Tables</h3>
+		<ul>
+			@foreach (var setting in ViewBag.tableActionLinks)
+			{
+				<li>
+					@Html.Raw(setting.Value);
+				</li>
+			}
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<h3>Procedures</h3>
+		<ul>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<h3>Views</h3>
+		<ul>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
+			<li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
+		</ul>
+	</div>
+</div>
+<div class="text-center">
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
